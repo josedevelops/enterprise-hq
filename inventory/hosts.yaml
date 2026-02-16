@@ -1,0 +1,19 @@
+---
+all:
+  children:
+    mdf:
+      hosts:
+        mdf-core-01:
+          ansible_host: 172.20.20.10
+          role: core
+          model: ceos
+    idfs:
+      hosts:
+        idf-switch-01: { ansible_host: 172.20.20.11, role: access, floor: 1 }
+        idf-switch-02: { ansible_host: 172.20.20.12, role: access, floor: 2 }
+        idf-switch-03: { ansible_host: 172.20.20.13, role: access, floor: 3 }
+        idf-switch-04: { ansible_host: 172.20.20.14, role: access, floor: 4 }
+        idf-switch-05: { ansible_host: 172.20.20.15, role: access, floor: 5 }
+  vars:
+    ansible_user: admin
+    ansible_password: admin_password

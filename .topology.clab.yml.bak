@@ -1,0 +1,16 @@
+name: enterprise-hq
+
+topology:
+  nodes:
+    mdf-core-01:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:latest 
+      mgmt-ipv4: 172.20.20.10
+
+    mdf-sw-01:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:latest
+      mgmt-ipv4: 172.20.20.11
+
+  links:
+    - endpoints: ["mdf-core-01:e1-1", "mdf-sw-01:e1-1"] 

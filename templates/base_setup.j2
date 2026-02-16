@@ -1,0 +1,13 @@
+enter candidate
+
+# Confirmed via 'tree system'
+set / system name host-name {{ hostname }}
+
+# Confirmed via 'info system'
+set / system information contact "{{ contact }}"
+set / system information location "{{ location }}"
+
+# Enable the default network instance (required for routing)
+set / network-instance default admin-state enable
+
+commit stay

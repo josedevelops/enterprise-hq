@@ -1,0 +1,16 @@
+certifi==2026.1.4
+charset-normalizer==3.4.4
+docker==7.1.0
+idna==3.11
+Jinja2==3.1.6
+markdown-it-py==4.0.0
+MarkupSafe==3.0.3
+mdurl==0.1.2
+Pygments==2.19.2
+python-dotenv==1.2.1
+PyYAML==6.0.3
+requests==2.32.5
+rich==14.3.2
+scrapli==2025.1.30
+scrapli_community==2025.1.30
+urllib3==2.6.3
