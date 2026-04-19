@@ -1,10 +1,13 @@
 name: enterprise-hq
+mgmt:
+  network: clab
+  ipv4-subnet: 172.20.20.0/24
 
 topology:
   nodes:
     mdf-core-01:
       kind: nokia_srlinux
-      image: ghcr.io/nokia/srlinux:latest 
+      image: ghcr.io/nokia/srlinux:latest
       mgmt-ipv4: 172.20.20.10
 
     mdf-sw-01:
@@ -12,5 +15,72 @@ topology:
       image: ghcr.io/nokia/srlinux:latest
       mgmt-ipv4: 172.20.20.11
 
+    idf-sw-01:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:latest
+      mgmt-ipv4: 172.20.20.12
+
+    idf-sw-02:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:latest
+      mgmt-ipv4: 172.20.20.13
+
+    edge-router-01:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:latest
+      mgmt-ipv4: 172.20.20.14
+
+    nat-router:
+      kind: linux
+      image: alpine:latest
+      mgmt-ipv4: 172.20.20.15
+      cmd: "tail -f /dev/null"
+
+    client01:
+      kind: linux
+      image: alpine:latest
+      mgmt-ipv4: 172.20.20.6
+      cmd: "tail -f /dev/null"
+
+    client02:
+      kind: linux
+      image: alpine:latest
+      mgmt-ipv4: 172.20.20.5
+      cmd: "tail -f /dev/null"
+
+    client03:
+      kind: linux
+      image: alpine:latest
+      mgmt-ipv4: 172.20.20.2
+      cmd: "tail -f /dev/null"
+
+    client04:
+      kind: linux
+      image: alpine:latest
+      mgmt-ipv4: 172.20.20.7
+      cmd: "tail -f /dev/null"
+
+    dhcp-server:
+      kind: linux
+      image: alpine:latest
+      mgmt-ipv4: 172.20.20.4
+      cmd: "tail -f /dev/null"
+
+    radius-server:
+      kind: linux
+      image: alpine:latest
+      mgmt-ipv4: 172.20.20.3
+      cmd: "tail -f /dev/null"
+
   links:
-    - endpoints: ["mdf-core-01:e1-1", "mdf-sw-01:e1-1"] 
+    - endpoints: ["mdf-core-01:e1-1", "mdf-sw-01:e1-1"]
+    - endpoints: ["mdf-core-01:e1-2", "nat-router:eth1"]
+    - endpoints: ["nat-router:eth2", "edge-router-01:e1-1"]
+    - endpoints: ["mdf-sw-01:e1-10", "idf-sw-01:e1-1"]
+    - endpoints: ["mdf-sw-01:e1-11", "idf-sw-02:e1-1"]
+    - endpoints: ["client01:eth1", "mdf-sw-01:e1-20"]
+    - endpoints: ["client02:eth1", "idf-sw-01:e1-20"]
+    - endpoints: ["client03:eth1", "idf-sw-02:e1-20"]
+    - endpoints: ["client04:eth1", "idf-sw-02:e1-21"]
+    - endpoints: ["dhcp-server:eth1", "mdf-sw-01:e1-30"]
+    - endpoints: ["radius-server:eth1", "mdf-sw-01:e1-31"]
