@@ -2,76 +2,68 @@ name: enterprise-hq
 mgmt:
   network: clab
   ipv4-subnet: 172.20.20.0/24
-
 topology:
   nodes:
     mdf-core-01:
       kind: nokia_srlinux
       image: ghcr.io/nokia/srlinux:latest
       mgmt-ipv4: 172.20.20.10
-
+      startup-config: configs/mdf-core-01/config.json
     mdf-sw-01:
       kind: nokia_srlinux
       image: ghcr.io/nokia/srlinux:latest
       mgmt-ipv4: 172.20.20.11
-
+      startup-config: configs/mdf-sw-01/config.json
     idf-sw-01:
       kind: nokia_srlinux
       image: ghcr.io/nokia/srlinux:latest
       mgmt-ipv4: 172.20.20.12
-
+      startup-config: configs/idf-sw-01/config.json
     idf-sw-02:
       kind: nokia_srlinux
       image: ghcr.io/nokia/srlinux:latest
       mgmt-ipv4: 172.20.20.13
-
+      startup-config: configs/idf-sw-02/config.json
     edge-router-01:
       kind: nokia_srlinux
       image: ghcr.io/nokia/srlinux:latest
       mgmt-ipv4: 172.20.20.14
-
+      startup-config: configs/edge-router-01/config.json
     nat-router:
       kind: linux
       image: alpine:latest
       mgmt-ipv4: 172.20.20.15
       cmd: "tail -f /dev/null"
-
     client01:
       kind: linux
       image: alpine:latest
       mgmt-ipv4: 172.20.20.6
       cmd: "tail -f /dev/null"
-
     client02:
       kind: linux
       image: alpine:latest
       mgmt-ipv4: 172.20.20.5
       cmd: "tail -f /dev/null"
-
     client03:
       kind: linux
       image: alpine:latest
       mgmt-ipv4: 172.20.20.2
       cmd: "tail -f /dev/null"
-
     client04:
       kind: linux
       image: alpine:latest
       mgmt-ipv4: 172.20.20.7
       cmd: "tail -f /dev/null"
-
     dhcp-server:
       kind: linux
       image: alpine:latest
       mgmt-ipv4: 172.20.20.4
       cmd: "tail -f /dev/null"
-
     radius-server:
       kind: linux
       image: alpine:latest
       mgmt-ipv4: 172.20.20.3
       cmd: "tail -f /dev/null"
-
   links:
     - endpoints: ["mdf-core-01:e1-1", "mdf-sw-01:e1-1"]
     - endpoints: ["mdf-core-01:e1-2", "nat-router:eth1"]
